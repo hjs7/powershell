@@ -10,15 +10,15 @@ $usermailsecgroups = Get-Recipient -Filter "Members -eq '$UserDName'" | Where-Ob
 ForEach($group in $usermailsecgroups) {
 
         #Check if the target user is already a member of the group
-        $MailGroupMembers = Get-DistributionGroupMember -Identity $group.Alias | Select-Object WindowsLiveID
+        $MailGroupMembers = Get-DistributionGroupMember -Identity $group.alias | Select-Object WindowsLiveID
         
-        If ($MailGroupMembers -notcontains $targetuser)
+        If ($MailGroupMembers.windowsliveid -notcontains $targetuser)
         {
             # Add target user to source user's mail enabled security group
             Add-DistributionGroupMember -Identity $group.alias -Member $targetuser
-            Write-Host "Added user to mail group: " $SourceUserMailMembership.alias
+            Write-Host "** Added user to mail group: " $group.alias -f green
         }
         else {
-            Write-Host "** No mail-enabled security groups added **" -f Yellow
+            Write-Host "** User already member of " $group.alias -f yellow
         }
     }
