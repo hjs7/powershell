@@ -42,7 +42,6 @@ If($SourceUser -ne $Null -and $TargetUser -ne $Null)
 
 Connect-ExchangeOnline
 
-
 $userDname = Get-User $SourceuserAccount | select -ExpandProperty DistinguishedName
 $usermailsecgroups = Get-Recipient -Filter "Members -eq '$UserDName'" | Where-Object { $_.RecipientType -eq "MailUniversalSecurityGroup" } | Select-Object alias
 
