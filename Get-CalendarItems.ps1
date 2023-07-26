@@ -16,7 +16,6 @@ foreach ($mailBox in $allMailBoxes){
     if ($listCalendars -contains $SearchString)
     {
         Write-Host "Calendar belongs to account: " $mailBoxAddress
-   
     }
     else {
         Write-Host "** Calendar not found in account " $mailBoxAddress "**" -f Red
