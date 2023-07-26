@@ -11,7 +11,8 @@ foreach ($mailbox in $allmailboxes){
 
     $mailboxaddress = $mailbox.UserPrincipalName
     $listcalendars = (Get-EXOMailboxFolderStatistics -Identity $mailboxaddress -Folderscope calendar).Name
-    
+
+    # Supposed to search the listcalendars variable for the searchstring, however it's never found 
     If ($listcalendars -contains $searchstring)
     {
         Write-Host "Calendar belongs to account: " $mailboxaddress
