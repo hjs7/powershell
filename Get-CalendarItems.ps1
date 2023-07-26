@@ -5,20 +5,20 @@ param (
     [string]$SearchString
 )
 
-$allmailboxes = (get-EXOmailbox)
+$allMailBoxes = (get-EXOmailbox)
 
-foreach ($mailbox in $allmailboxes){
+foreach ($mailBox in $allMailBoxes){
 
-    $mailboxaddress = $mailbox.UserPrincipalName
-    $listcalendars = (Get-EXOMailboxFolderStatistics -Identity $mailboxaddress -Folderscope calendar).Name
+    $mailBoxAddress = $mailBox.UserPrincipalName
+    $listCalendars = (Get-EXOMailboxFolderStatistics -Identity $mailBoxAddress -Folderscope calendar).Name
 
     # Supposed to search the listcalendars variable for the SearchString, however it's never found 
-    If ($listcalendars -contains $SearchString)
+    if ($listCalendars -contains $SearchString)
     {
-        Write-Host "Calendar belongs to account: " $mailboxaddress
+        Write-Host "Calendar belongs to account: " $mailBoxAddress
    
     }
-    Else {
-        Write-Host "** Calendar not found in account " $mailboxaddress "**" -f Red
+    else {
+        Write-Host "** Calendar not found in account " $mailBoxAddress "**" -f Red
         }
 }
